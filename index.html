@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Structa — Structured Synthetic Data</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Tipografia clássica, institucional -->
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #f6f5f1;
+      --text: #1e1e1e;
+      --muted: #555;
+      --border: #cfcfcf;
+      --accent: #2a2a2a;
+      --box-bg: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Libre Baskerville', serif;
+      line-height: 1.65;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 48px 24px;
+    }
+
+    header {
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 24px;
+      margin-bottom: 48px;
+    }
+
+    h1 {
+      font-size: 2.6rem;
+      margin: 0;
+      letter-spacing: 0.5px;
+    }
+
+    .subtitle {
+      margin-top: 8px;
+      font-size: 1.1rem;
+      color: var(--muted);
+    }
+
+    h2 {
+      margin-top: 56px;
+      font-size: 1.6rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+    }
+
+    h3 {
+      margin-top: 32px;
+      font-size: 1.2rem;
+    }
+
+    p {
+      margin: 16px 0;
+    }
+
+    ul {
+      margin: 16px 0;
+      padding-left: 22px;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    .box {
+      background: var(--box-bg);
+      border: 1px solid var(--border);
+      padding: 20px 24px;
+      margin: 32px 0;
+    }
+
+    .emphasis {
+      font-weight: 700;
+    }
+
+    footer {
+      margin-top: 72px;
+      padding-top: 24px;
+      border-top: 2px solid var(--border);
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .contact {
+      background: var(--box-bg);
+      border: 2px solid var(--accent);
+      padding: 24px;
+      margin-top: 48px;
+    }
+
+    @media (max-width: 640px) {
+      h1 {
+        font-size: 2.1rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <header>
+      <h1>Structa</h1>
+      <div class="subtitle">
+        Structured Synthetic Data Infrastructure
+      </div>
+    </header>
+
+    <section>
+      <p>
+        <span class="emphasis">Structa</span> é uma infraestrutura de
+        <span class="emphasis">dados sintéticos estruturados</span>,
+        projetada para uso institucional em contextos onde dados reais
+        são sensíveis, restritos ou juridicamente complexos.
+      </p>
+
+      <p>
+        A plataforma foca em <strong>consistência matemática</strong>,
+        <strong>explicabilidade</strong> e <strong>auditabilidade</strong>,
+        permitindo o uso seguro de dados públicos e administrativos em
+        pesquisa, inovação, testes de sistemas e políticas públicas.
+      </p>
+    </section>
+
+    <section>
+      <h2>O problema</h2>
+
+      <p>
+        Bases públicas como dados de mercado de trabalho, saúde, educação
+        e dados territoriais são ricas e estratégicas, porém:
+      </p>
+
+      <ul>
+        <li>são juridicamente sensíveis (LGPD);</li>
+        <li>têm alto risco de reidentificação;</li>
+        <li>são difíceis de compartilhar e reutilizar;</li>
+        <li>frequentemente travam projetos de inovação.</li>
+      </ul>
+
+      <div class="box">
+        <p>
+          Organizações enfrentam uma escolha artificial:
+        </p>
+        <p>
+          <strong>usar dados reais</strong> e assumir risco jurídico<br>
+          <strong>ou</strong><br>
+          <strong>abrir mão do uso de dados</strong> e limitar decisões.
+        </p>
+      </div>
+    </section>
+
+    <section>
+      <h2>A proposta da Structa</h2>
+
+      <p>
+        A Structa gera <strong>datasets sintéticos certificados</strong>,
+        que preservam a estrutura essencial dos dados originais, incluindo:
+      </p>
+
+      <ul>
+        <li>estrutura estatística;</li>
+        <li>coerência territorial;</li>
+        <li>dinâmica temporal;</li>
+        <li>restrições do domínio.</li>
+      </ul>
+
+      <p>
+        Cada dataset é entregue como um <strong>ativo de dados</strong>,
+        acompanhado de relatórios formais de utilidade, risco e coerência.
+      </p>
+    </section>
+
+    <section>
+      <h2>Diferenciais</h2>
+
+      <ul>
+        <li>Consistência estrutural antes de sofisticação algorítmica</li>
+        <li>Explicabilidade como princípio de design</li>
+        <li>Foco em dados públicos e territoriais</li>
+        <li>Governança e documentação como parte do produto</li>
+        <li>Alinhamento com padrões internacionais de dados sintéticos</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Produto inicial</h2>
+
+      <h3>Structa Labor</h3>
+
+      <p>
+        Dados sintéticos do mercado de trabalho baseados em fontes
+        administrativas oficiais, integrando informações de
+        <strong>estoque e fluxo de empregos</strong>.
+      </p>
+
+      <ul>
+        <li>Município × setor × tempo</li>
+        <li>Uso seguro para pesquisa, testes e simulações</li>
+        <li>Documentação técnica completa</li>
+      </ul>
+    </section>
+
+    <div class="contact">
+      <strong>Contato institucional</strong>
+      <p>
+        A Structa está aberta a parcerias institucionais,
+        projetos de pesquisa e aplicações corporativas.
+      </p>
+      <p>
+        Contato disponível sob demanda.
+      </p>
+    </div>
+
+    <footer>
+      <p>
+        Structa — Structured Synthetic Data<br>
+        Dados sintéticos que respeitam estrutura, contexto e significado.
+      </p>
+    </footer>
+
+  </div>
+
+</body>
+</html>
