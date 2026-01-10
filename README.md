@@ -61,7 +61,7 @@ Nenhum código de produto, dados reais ou métodos proprietários são disponibi
 ## Contato
 A Structa está aberta a **parcerias institucionais, projetos de pesquisa e aplicações corporativas**.
 
-Contato institucional disponível sob demanda.
+Contato institucional disponível sob demanda: 
 smp.sandramariapereira@gmail.com
 ---
 
