@@ -1,5 +1,3 @@
-# structa-site
-
 # Structa  
 **Structured Synthetic Data Infrastructure**
 
