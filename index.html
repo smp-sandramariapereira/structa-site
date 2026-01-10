@@ -5,30 +5,31 @@
   <title>Structa — Structured Synthetic Data</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Monospace institucional -->
+  <!-- Classic monospace terminal font -->
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
 
   <style>
     :root {
+      /* TERMINAL (CRT) THEME */
       --bg: #00140d;
       --panel: #001f14;
       --text: #33ff99;
       --muted: #26cc88;
       --border: #1f6f52;
       --accent: #66ffcc;
+
+      /* PLAIN THEME (toggle) */
+      --plain-bg: #f6f5f1;
+      --plain-panel: #ffffff;
+      --plain-text: #1e1e1e;
+      --plain-muted: #555;
+      --plain-border: #cfcfcf;
+      --plain-accent: #2a2a2a;
     }
 
-    body.plain {
-      --bg: #f6f5f1;
-      --panel: #ffffff;
-      --text: #1e1e1e;
-      --muted: #555;
-      --border: #cfcfcf;
-      --accent: #2a2a2a;
-      text-shadow: none;
+    * {
+      box-sizing: border-box;
     }
-
-    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -36,7 +37,7 @@
       color: var(--text);
       font-family: 'IBM Plex Mono', monospace;
       line-height: 1.65;
-      text-shadow: 0 0 3px rgba(51,255,153,.35);
+      text-shadow: 0 0 3px rgba(51, 255, 153, 0.35);
     }
 
     /* Scanlines CRT */
@@ -47,16 +48,14 @@
       pointer-events: none;
       background: repeating-linear-gradient(
         to bottom,
-        rgba(0,0,0,0.05),
-        rgba(0,0,0,0.05) 1px,
+        rgba(0,0,0,0.06),
+        rgba(0,0,0,0.06) 1px,
         rgba(0,0,0,0) 2px,
         rgba(0,0,0,0) 4px
       );
-      opacity: .25;
+      opacity: 0.25;
       z-index: 1;
     }
-
-    body.plain::before { display: none; }
 
     .container {
       max-width: 920px;
@@ -66,6 +65,7 @@
       z-index: 2;
     }
 
+    /* HEADER */
     header {
       display: flex;
       justify-content: space-between;
@@ -83,11 +83,12 @@
       letter-spacing: 1px;
     }
 
-    /* Cursor piscando */
-    .cursor::after {
+    /* Subtle blinking cursor */
+    h1::after {
       content: "█";
-      margin-left: 6px;
-      animation: blink 1s steps(1) infinite;
+      margin-left: 8px;
+      color: var(--accent);
+      animation: blink 1s steps(1, end) infinite;
     }
 
     @keyframes blink {
@@ -96,14 +97,16 @@
 
     .subtitle {
       margin-top: 6px;
-      font-size: .95rem;
       color: var(--muted);
+      font-size: 1rem;
     }
 
+    /* CONTROLS */
     .controls {
       display: flex;
       gap: 8px;
       flex-wrap: wrap;
+      align-items: center;
     }
 
     .controls button {
@@ -112,17 +115,23 @@
       border: 1px solid var(--border);
       padding: 8px 14px;
       font-family: inherit;
-      font-size: .8rem;
+      font-size: 0.85rem;
       letter-spacing: 1px;
       text-transform: uppercase;
       cursor: pointer;
     }
 
-    .controls button.active {
+    .controls button[aria-pressed="true"] {
       border: 2px solid var(--accent);
       color: var(--accent);
     }
 
+    .controls button.mode-active {
+      border: 2px solid var(--accent);
+      color: var(--accent);
+    }
+
+    /* CONTENT */
     h2 {
       margin-top: 56px;
       font-size: 1.4rem;
@@ -137,7 +146,18 @@
       letter-spacing: 1px;
     }
 
-    ul { padding-left: 20px; }
+    p {
+      margin: 16px 0;
+    }
+
+    ul {
+      margin: 16px 0;
+      padding-left: 20px;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
 
     .box {
       background: var(--panel);
@@ -157,91 +177,286 @@
       margin-top: 72px;
       padding-top: 24px;
       border-top: 2px solid var(--border);
-      font-size: .85rem;
+      font-size: 0.85rem;
       color: var(--muted);
     }
 
-    [data-lang] { display: none; }
-    [data-lang].active { display: block; }
+    /* LANGUAGE VISIBILITY */
+    [data-lang] {
+      display: none;
+    }
+
+    [data-lang].active {
+      display: block;
+    }
+
+    @media (max-width: 640px) {
+      h1 {
+        font-size: 2rem;
+      }
+    }
+
+    /* PLAIN MODE OVERRIDES */
+    body.plain {
+      background: var(--plain-bg);
+      color: var(--plain-text);
+      text-shadow: none;
+    }
+
+    body.plain::before { display: none; }
+
+    body.plain header {
+      border-bottom-color: var(--plain-border);
+    }
+
+    body.plain .subtitle { color: var(--plain-muted); }
+
+    body.plain h2 {
+      border-bottom-color: var(--plain-border);
+    }
+
+    body.plain .box,
+    body.plain .contact {
+      background: var(--plain-panel);
+      border-color: var(--plain-border);
+    }
+
+    body.plain .contact {
+      border-color: var(--plain-accent);
+    }
+
+    body.plain footer {
+      border-top-color: var(--plain-border);
+      color: var(--plain-muted);
+    }
+
+    body.plain .controls button {
+      background: var(--plain-panel);
+      color: var(--plain-text);
+      border-color: var(--plain-border);
+    }
+
+    body.plain .controls button[aria-pressed="true"],
+    body.plain .controls button.mode-active {
+      border-color: var(--plain-accent);
+      color: var(--plain-accent);
+    }
+
+    body.plain h1::after {
+      color: var(--plain-accent);
+    }
   </style>
 </head>
 
 <body>
+  <div class="container">
 
-<div class="container">
+    <header>
+      <div>
+        <h1>STRUCTA</h1>
 
-<header>
-  <div>
-    <h1 class="cursor">STRUCTA</h1>
-    <div class="subtitle" data-lang="pt">Infraestrutura de Dados Sintéticos Estruturados</div>
-    <div class="subtitle" data-lang="en">Structured Synthetic Data Infrastructure</div>
+        <div class="subtitle" data-lang="pt">
+          Infraestrutura de Dados Sintéticos Estruturados
+        </div>
+
+        <div class="subtitle" data-lang="en">
+          Structured Synthetic Data Infrastructure
+        </div>
+      </div>
+
+      <div class="controls">
+        <button id="btn-pt" aria-pressed="true">PT</button>
+        <button id="btn-en" aria-pressed="false">EN</button>
+        <button id="btn-mode" class="mode-active" aria-label="Toggle plain/terminal mode">PLAIN</button>
+      </div>
+    </header>
+
+    <!-- PORTUGUÊS -->
+    <main data-lang="pt" class="active">
+
+      <p>
+        <strong>Structa</strong> é uma infraestrutura de
+        <strong>dados sintéticos estruturados</strong>,
+        projetada para uso institucional em contextos onde dados reais
+        são sensíveis, restritos ou juridicamente complexos.
+      </p>
+
+      <p>
+        A plataforma prioriza <strong>consistência matemática</strong>,
+        <strong>explicabilidade</strong> e <strong>auditabilidade</strong>,
+        permitindo o uso seguro de dados públicos e administrativos
+        em pesquisa, inovação, testes de sistemas e políticas públicas.
+      </p>
+
+      <h2>O problema</h2>
+
+      <ul>
+        <li>Dados públicos são juridicamente sensíveis (LGPD)</li>
+        <li>Alto risco de reidentificação</li>
+        <li>Dificuldade de compartilhamento e reutilização</li>
+        <li>Bloqueio de projetos de inovação</li>
+      </ul>
+
+      <div class="box">
+        Organizações enfrentam uma escolha artificial:<br><br>
+        <strong>usar dados reais</strong> e assumir risco jurídico<br>
+        <strong>ou</strong><br>
+        <strong>abrir mão do uso de dados</strong> e limitar decisões.
+      </div>
+
+      <h2>A proposta da Structa</h2>
+
+      <ul>
+        <li>Estrutura estatística preservada</li>
+        <li>Coerência territorial</li>
+        <li>Dinâmica temporal</li>
+        <li>Restrições explícitas do domínio</li>
+      </ul>
+
+      <p>
+        Cada dataset é entregue como um <strong>ativo certificado</strong>,
+        acompanhado de relatórios formais de utilidade, risco e coerência.
+      </p>
+
+      <h2>Produto inicial</h2>
+
+      <h3>Structa Labor</h3>
+
+      <ul>
+        <li>Município × setor × tempo</li>
+        <li>Integração de estoque e fluxo de empregos</li>
+        <li>Uso seguro para pesquisa, testes e simulações</li>
+      </ul>
+
+      <div class="contact">
+        <strong>Contato institucional</strong><br><br>
+        Parcerias institucionais, pesquisa e aplicações corporativas.<br>
+        Contato sob demanda.
+      </div>
+
+    </main>
+
+    <!-- ENGLISH -->
+    <main data-lang="en">
+
+      <p>
+        <strong>Structa</strong> is a
+        <strong>structured synthetic data infrastructure</strong>,
+        designed for institutional use in contexts where real data
+        is sensitive, restricted, or legally complex.
+      </p>
+
+      <p>
+        The platform prioritizes <strong>mathematical consistency</strong>,
+        <strong>explainability</strong>, and <strong>auditability</strong>,
+        enabling safe use of public and administrative data for research,
+        innovation, system testing, and public policy.
+      </p>
+
+      <h2>The problem</h2>
+
+      <ul>
+        <li>Public data is legally sensitive</li>
+        <li>Re-identification risk</li>
+        <li>Hard to share and reuse</li>
+        <li>Innovation pipelines are blocked</li>
+      </ul>
+
+      <div class="box">
+        Organizations face an artificial trade-off:<br><br>
+        <strong>use real data</strong> and accept legal risk<br>
+        <strong>or</strong><br>
+        <strong>avoid data</strong> and limit decisions.
+      </div>
+
+      <h2>Structa’s approach</h2>
+
+      <ul>
+        <li>Preserved statistical structure</li>
+        <li>Territorial coherence</li>
+        <li>Temporal dynamics</li>
+        <li>Explicit domain constraints</li>
+      </ul>
+
+      <p>
+        Each dataset is delivered as a <strong>certified data asset</strong>,
+        accompanied by formal reports on utility, risk, and coherence.
+      </p>
+
+      <h2>Initial product</h2>
+
+      <h3>Structa Labor</h3>
+
+      <ul>
+        <li>Municipality × sector × time</li>
+        <li>Integrated employment stock and flow</li>
+        <li>Safe for research, testing, and simulations</li>
+      </ul>
+
+      <div class="contact">
+        <strong>Institutional contact</strong><br><br>
+        Institutional partnerships, research projects, and enterprise use.<br>
+        Contact available upon request.
+      </div>
+
+    </main>
+
+    <footer>
+      Structa — Structured Synthetic Data<br>
+      Synthetic data that respects structure, context, and meaning.
+    </footer>
+
   </div>
 
-  <div class="controls">
-    <button id="pt" class="active">PT</button>
-    <button id="en">EN</button>
-    <button id="mode">PLAIN</button>
-  </div>
-</header>
+  <script>
+    // Language toggle (PT/EN) — same content you provided
+    const btnPT = document.getElementById('btn-pt');
+    const btnEN = document.getElementById('btn-en');
+    const blocks = document.querySelectorAll('[data-lang]');
 
-<main data-lang="pt" class="active">
-  <p><strong>Structa</strong> é uma infraestrutura de <strong>dados sintéticos estruturados</strong>, projetada para uso institucional onde dados reais são sensíveis ou restritos.</p>
-  <h2>O problema</h2>
-  <ul>
-    <li>Dados públicos são juridicamente sensíveis</li>
-    <li>Risco de reidentificação</li>
-    <li>Dificuldade de compartilhamento</li>
-  </ul>
-  <div class="box">Usar dados reais implica risco. Evitar dados implica estagnação.</div>
-</main>
+    function setLang(lang) {
+      blocks.forEach(el => {
+        el.classList.toggle('active', el.getAttribute('data-lang') === lang);
+      });
+      btnPT.setAttribute('aria-pressed', lang === 'pt');
+      btnEN.setAttribute('aria-pressed', lang === 'en');
+      document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
+      localStorage.setItem('structa_lang', lang);
+    }
 
-<main data-lang="en">
-  <p><strong>Structa</strong> is a <strong>structured synthetic data infrastructure</strong> for institutional use where real data is sensitive or restricted.</p>
-  <h2>The problem</h2>
-  <ul>
-    <li>Public data is legally sensitive</li>
-    <li>Re-identification risk</li>
-    <li>Hard to share and reuse</li>
-  </ul>
-  <div class="box">Using real data creates risk. Avoiding data limits progress.</div>
-</main>
+    const saved = localStorage.getItem('structa_lang') || 'pt';
+    setLang(saved);
 
-<footer>
-  Structa — Structured Synthetic Data<br>
-  Trust by structure, context and meaning.
-</footer>
+    btnPT.onclick = () => setLang('pt');
+    btnEN.onclick = () => setLang('en');
 
-</div>
+    // Mode toggle (TERMINAL / PLAIN)
+    const btnMode = document.getElementById('btn-mode');
 
-<script>
-  const btnPT = document.getElementById('pt');
-  const btnEN = document.getElementById('en');
-  const btnMode = document.getElementById('mode');
-  const blocks = document.querySelectorAll('[data-lang]');
-  let mode = 'terminal';
+    function setMode(mode) {
+      const isPlain = mode === 'plain';
+      document.body.classList.toggle('plain', isPlain);
 
-  function setLang(lang) {
-    blocks.forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
-    btnPT.classList.toggle('active', lang === 'pt');
-    btnEN.classList.toggle('active', lang === 'en');
-    document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
-    localStorage.setItem('lang', lang);
-  }
+      // Button label indicates what will happen on click (next mode)
+      btnMode.textContent = isPlain ? 'TERMINAL' : 'PLAIN';
 
-  function toggleMode() {
-    document.body.classList.toggle('plain');
-    mode = document.body.classList.contains('plain') ? 'plain' : 'terminal';
-    btnMode.textContent = mode === 'plain' ? 'TERMINAL' : 'PLAIN';
-    localStorage.setItem('mode', mode);
-  }
+      // Visual active state (always "active" as a control)
+      btnMode.classList.add('mode-active');
 
-  btnPT.onclick = () => setLang('pt');
-  btnEN.onclick = () => setLang('en');
-  btnMode.onclick = toggleMode;
+      localStorage.setItem('structa_mode', mode);
+    }
 
-  setLang(localStorage.getItem('lang') || 'pt');
-  if (localStorage.getItem('mode') === 'plain') toggleMode();
-</script>
+    function toggleMode() {
+      const current = localStorage.getItem('structa_mode') || 'terminal';
+      setMode(current === 'plain' ? 'terminal' : 'plain');
+    }
+
+    btnMode.onclick = toggleMode;
+
+    // Initialize mode from storage
+    const savedMode = localStorage.getItem('structa_mode') || 'terminal';
+    setMode(savedMode);
+  </script>
 
 </body>
 </html>
