@@ -1,4 +1,4 @@
-# Structa  
+# Structa  Labor
 **Synthetic Workforce Retention Data Infrastructure**
 
 Structa é uma **infraestrutura de dados sintéticos estruturados**, projetada para permitir o **treinamento e a validação de modelos preditivos de RH**, em especial modelos de **retenção e tempo de permanência no emprego**, sem o uso de dados sensíveis de colaboradores.
